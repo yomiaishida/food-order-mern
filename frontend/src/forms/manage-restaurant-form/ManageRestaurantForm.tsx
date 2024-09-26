@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import DetailsSection from "./DetailsSection";
 import CuisinesSection from "./CuisinesSection";
+import MenuSection from "./MenuSection";
+import ImageSection from "./ImageSection";
 
 const formSchema = z
   .object({
@@ -72,9 +74,9 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
         <Separator />
         <CuisinesSection />
         <Separator />
-        {/* <MenuSection /> */}
+        <MenuSection />
         <Separator />
-        {/* <ImageSection /> */}
+        <ImageSection />
         {isLoading ? <LoadingButton /> : <Button type="submit">Submit</Button>}
       </form>
     </Form>
