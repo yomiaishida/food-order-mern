@@ -61,8 +61,23 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
     },
   });
 
-  const onSubmit = (formdDataJson: RestaurantFormData) => {
-    //
+  const onSubmit = (formDataJson: RestaurantFormData) => {
+    const formData = new FormData()
+
+    formData.append("restaurantName", formDataJson.restaurantName)
+    formData.append("city", formDataJson.city)
+    formData.append("country", formDataJson.country)
+    formData.append("deliveryPrice", (formDataJson.deliveryPrice * 100).toString())
+    formData.append("estimatedDeliveryTime", formDataJson.estimatedDeliveryTime.toString())
+    formDataJson.cuisines.forEach((cuisine, index) => {
+      formData.append(`cuisines[${index}]`, cuisine)
+    })
+    formDataJson.menuItems.forEach((menuItem, index) => {
+      formData.append(`menuItems[${index}][name]`, menuItem.name)
+      formData.append(`menuItems[${index}][price]`, (menuItem.price * 100)toString())
+    })
+
+    formData.append(`imageFile`, formDataJson.imageFile)
   };
   return (
     <Form {...form}>
@@ -77,7 +92,7 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
         <MenuSection />
         <Separator />
         <ImageSection />
-        {isLoading ? <LoadingButton /> : <Button type="submit">Submit</Button>}
+        {isLoading ? <LoadingButton /> : <Button type="submit" onclick={}>Submit</Button>}
       </form>
     </Form>
   );
